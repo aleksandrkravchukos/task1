@@ -1,29 +1,25 @@
-# README #
+# Docker / PHP 7.4 console / composer / phpunit 
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Blank docker project for console php 7.4 projects with composer and phpunit.
 
-### What is this repository for? ###
+## Prerequisites
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Install Docker and optionally Make utility.
 
-### How do I get set up? ###
+Commands from Makefile could be executed manually in case Make utility is not installed.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Build container and install composer dependencies
 
-### Contribution guidelines ###
+    Make build
 
-* Writing tests
-* Code review
-* Other guidelines
+## Build container and install composer dependencies
 
-### Who do I talk to? ###
+If dist files are not copied to actual destination, then
+    
+    Make copy-dist-configs
+        
+## Run application
 
-* Repo owner or admin
-* Other community or team contact
+Runs container and executes console application.
+
+    Make run
