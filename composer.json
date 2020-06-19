@@ -1,0 +1,28 @@
+{
+  "name": "akravchuk/docker-php74-composer-phpunit-task1",
+  "description": "Black docker project for console php 7.4 projects with composer and phpunit. Task 1. TABLE DDL + code",
+  "authors": [
+    {
+      "name": "Aleksandr Kravchuk",
+      "email": "aleksandr.kravchuk.os@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sample\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SampleTest\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.1",
+    "phpstan/phpstan": "^0.12.18",
+    "friendsofphp/php-cs-fixer": "^2.16"
+  }
+}
