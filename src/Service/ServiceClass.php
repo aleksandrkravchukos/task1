@@ -8,19 +8,33 @@ use Sample\Repository\RepositoryClass;
 
 class ServiceClass
 {
+    /**
+     * @var RepositoryClass
+     */
     private $repository;
 
+    /**
+     * ServiceClass constructor.
+     * @param RepositoryClass $repository
+     */
     public function __construct(RepositoryClass $repository)
     {
         $this->repository = $repository;
     }
 
-    public function getRepository()
+    /**
+     * @return RepositoryClass
+     */
+    public function getRepository(): RepositoryClass
     {
         return $this->repository;
     }
 
-    public function insertRow(){
+    /**
+     * @return string
+     */
+    public function insertRow()
+    {
         return 'test';
     }
 }

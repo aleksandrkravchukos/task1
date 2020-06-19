@@ -6,10 +6,27 @@ namespace Sample\Config;
 
 class ConfigClass
 {
+    /**
+     * @var string
+     */
     private $host;
+
+    /**
+     * @var string
+     */
     private $username;
+
+    /**
+     * @var string
+     */
     private $password;
 
+    /**
+     * ConfigClass constructor.
+     * @param string $host
+     * @param string $username
+     * @param string $password
+     */
     public function __construct(string $host, string $username, string $password)
     {
         $this->host = $host;
@@ -17,17 +34,26 @@ class ConfigClass
         $this->password = $password;
     }
 
-    public function getHost()
+    /**
+     * @return string
+     */
+    public function getHost(): string
     {
         return $this->host;
     }
 
-    public function getUserName()
+    /**
+     * @return string
+     */
+    public function getUserName(): string
     {
         return $this->username;
     }
 
-    public function getPassword()
+    /**
+     * @return string
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
