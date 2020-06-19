@@ -1,25 +1,7 @@
 # Docker / PHP 7.4 console / composer / phpunit 
 
-Blank docker project for console php 7.4 projects with composer and phpunit.
+##Clone the repo
 
-## Prerequisites
+###docker-compose up -d
 
-Install Docker and optionally Make utility.
-
-Commands from Makefile could be executed manually in case Make utility is not installed.
-
-## Build container and install composer dependencies
-
-    Make build
-
-## Build container and install composer dependencies
-
-If dist files are not copied to actual destination, then
-    
-    Make copy-dist-configs
-        
-## Run application
-
-Runs container and executes console application.
-
-    Make run
+###docker exec -i mysql8 mysql -uroot -proot  content < dump/task1.sql
