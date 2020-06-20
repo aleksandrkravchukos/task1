@@ -17,14 +17,22 @@ Commands from Makefile could be executed manually in case Make utility is not in
 If dist files are not copied to actual destination, then
     
     Make copy-dist-configs
+    
+## Run docker 
 
+    docker-compose up -d
+    
+## Check docker containers
+
+    docker ps    
+    
 ## Create database 
 
     docker exec -i mysql8 mysql -uroot -proot  content < dump/task1.sql        
 
 ## Run functional tests
 
-Runs container and executes unit tests.
+Runs container and executes functional tests.
 
     Make functional-tests
 
