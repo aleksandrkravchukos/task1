@@ -5,6 +5,8 @@ namespace SampleTest\Unit;
 use PDO;
 use PHPUnit\Framework\TestCase;
 use Sample\Config\ConfigClass;
+use Sample\Constant;
+use Sample\Exception\BookCreationException;
 use Sample\Repository\BookRepository;
 use Sample\Service\BookService;
 
@@ -14,11 +16,6 @@ use Sample\Service\BookService;
 class BookServiceTest extends TestCase
 {
     private ConfigClass $config;
-
-    /**
-     * @var PDO
-     */
-    private $pdo;
 
     /**
      * @var BookService
@@ -33,9 +30,12 @@ class BookServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->config = new ConfigClass();
-        $this->pdo = new PDO($this->config->getDsn(), $this->config->getUserName(), $this->config->getPassword());
-        $this->repository = new BookRepository($this->config);
+        $pdo = new PDO($this->config->getDsn(), $this->config->getUserName(), $this->config->getPassword());
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->repository = new BookRepository($pdo);
         $this->service = new BookService($this->repository);
+
+        $this->repository->truncate();
     }
 
     /**
@@ -44,15 +44,14 @@ class BookServiceTest extends TestCase
     public function canAddString(): void
     {
         echo PHP_EOL . 'canAddString' . PHP_EOL;
-
+        $bookName = Constant::SAMPLE_BOOK_NAME;
         $str = file_get_contents('./fixtures/SampleBigText.txt');
-        $this->service->deleteAllFromContent();
-        $this->service->insertRow($str);
+        $this->service->insertRow($str, $bookName);
 
-        $getAllFromDb = $this->service->getAllFromBookTable();
+        $bookRows = $this->repository->getAll();
 
-        $this->assertEquals($str, $getAllFromDb[0]);
-
+        $this->assertCount(1, $bookRows);
+        $this->assertEquals($str, $bookRows[0]['one_row']);
     }
 
     /**
@@ -60,16 +59,21 @@ class BookServiceTest extends TestCase
      */
     public function canAddDuplicateText(): void
     {
+        $this->expectException(BookCreationException::class);
+        $this->expectExceptionMessage('Book sentence with this text already exist');
+
         echo PHP_EOL . 'canAddDuplicateText' . PHP_EOL;
-        $firstText = file_get_contents('./fixtures/SampleBigText.txt');
-        $secondText = file_get_contents('./fixtures/SampleBigText.txt');
+        $str = file_get_contents('./fixtures/SampleBigText.txt');
+        $bookName = Constant::SAMPLE_BOOK_NAME;
+        $this->service->insertRow($str, $bookName);
+        // Inserting the same text twice
+        $this->service->insertRow($str, $bookName);
 
-        $this->service->deleteAllFromContent();
+        $bookRows = $this->repository->getAll();
 
-        $this->service->insertRow($firstText);
-        $this->service->insertRow($secondText);
+        $this->assertCount(1, $bookRows);
+        $this->assertEquals($str, $bookRows[0]['one_row']);
 
-        $this->assertEquals($firstText, $secondText);
 
     }
 
@@ -81,13 +85,16 @@ class BookServiceTest extends TestCase
         echo PHP_EOL . 'canAddAnotherText' . PHP_EOL;
         $firstText = file_get_contents('./fixtures/SampleBigText.txt');
         $secondText = file_get_contents('./fixtures/AnotherText.txt');
+        $bookName = Constant::SAMPLE_BOOK_NAME;
 
-        $this->service->deleteAllFromContent();
+        $this->service->insertRow($firstText, $bookName);
+        $this->service->insertRow($secondText, $bookName);
 
-        $this->service->insertRow($firstText);
-        $this->service->insertRow($secondText);
+        $bookRows = $this->repository->getAll();
 
-        $this->assertNotEquals($firstText, $secondText);
+        $this->assertCount(2, $bookRows);
+        $this->assertEquals($firstText, $bookRows[0]['one_row']);
+        $this->assertEquals($secondText, $bookRows[1]['one_row']);
 
     }
 }

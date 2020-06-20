@@ -3,54 +3,37 @@
 
 namespace Sample\Repository;
 
-
-use Exception;
 use PDO;
-use function PHPUnit\Framework\assertNotTrue;
-use Sample\Config\ConfigClass;
 
 class BookRepository
 {
-
-    /**
-     * @var ConfigClass
-     */
-    private $config;
-
     /**
      * @var PDO
      */
     private $pdo;
 
-    /**
-     * RepositoryClass constructor.
-     * @param ConfigClass $config
-     */
-    public function __construct(ConfigClass $config)
+    public function __construct(PDO $pdo)
     {
-        $this->config = $config;
-        $this->pdo = new PDO($this->config->getDsn(), $this->config->getUserName(), $this->config->getPassword());
+        $this->pdo = $pdo;
     }
 
     /**
      * Delete all rows from database content and table book.
      */
-    public function deleteAll()
+    public function truncate()
     {
-        $query = "DELETE FROM `book`";
+        $query = "TRUNCATE `book`";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
     }
 
     /**
      * @param string $str
+     * @param string $bookName
      * @return bool
      */
-    public function insertRow(string $str)
+    public function insertRow(string $str, string $bookName)
     {
-        echo PHP_EOL . 'Inserting Row - ';
-
-        $bookName = 'New book';
         $hash = md5($str);
         $query = "INSERT INTO `book` (`name`, `one_row`,`hash_text`) VALUES (:name, :one_row, :hash_text)";
         $params = [
@@ -60,17 +43,10 @@ class BookRepository
         ];
 
         $stmt = $this->pdo->prepare($query);
-        $success = false;
 
-        try {
-            $success = $stmt->execute($params);
-        } catch (Exception $exception) {
+        $stmt->execute($params);
 
-        }
-
-        var_dump($success);
-
-        return $success;
+        return true;
     }
 
     /**
@@ -78,12 +54,7 @@ class BookRepository
      */
     public function getAll()
     {
-        $stm = $this->pdo->query('SELECT * FROM book')->fetchAll(PDO::FETCH_ASSOC);
-        $result = [];
-        foreach ($stm as $key => $value) {
-            $result[] = $value['one_row'];
-        }
-
-        return $result;
+        return $this->pdo->query('SELECT * FROM book')
+            ->fetchAll(PDO::FETCH_ASSOC);
     }
 }

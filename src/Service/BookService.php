@@ -2,6 +2,9 @@
 
 namespace Sample\Service;
 
+use PDOException;
+use Sample\Constant;
+use Sample\Exception\BookCreationException;
 use Sample\Repository\BookRepository;
 
 class BookService
@@ -21,37 +24,22 @@ class BookService
     }
 
     /**
-     * @return BookRepository
-     */
-    public function getRepository(): BookRepository
-    {
-        return $this->repository;
-    }
-
-    /**
      * Insert one row to DB.
      *
      * @param string $srt
+     * @param string $bookName
+     * @throws BookCreationException
      */
-    public function insertRow(string $srt): void
+    public function insertRow(string $srt, string $bookName): void
     {
-        $this->repository->insertRow($srt);
-    }
+        try {
+            $this->repository->insertRow($srt, $bookName);
+        } catch (PDOException $exception) {
+            if ($exception->errorInfo[1] == Constant::ERROR_DUPLICATE_CODE) {
+                throw new BookCreationException('Book sentence with this text already exist');
 
-    /**
-     * Delete all from book table.
-     */
-    public function deleteAllFromContent()
-    {
-        $this->repository->deleteAll();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllFromBookTable()
-    {
-        return $this->repository->getAll();
+            }
+        }
     }
 
 }
