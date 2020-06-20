@@ -45,7 +45,7 @@ class BookServiceTest extends TestCase
     {
         echo PHP_EOL . 'canAddString' . PHP_EOL;
 
-        $str = file_get_contents('./fixtures/SampleText.txt');
+        $str = file_get_contents('./fixtures/SampleBigText.txt');
         $this->service->deleteAllFromContent();
         $this->service->insertRow($str);
 
@@ -61,8 +61,8 @@ class BookServiceTest extends TestCase
     public function canAddDuplicateText(): void
     {
         echo PHP_EOL . 'canAddDuplicateText' . PHP_EOL;
-        $firstText = file_get_contents('./fixtures/SampleText.txt');
-        $secondText = file_get_contents('./fixtures/SampleText.txt');
+        $firstText = file_get_contents('./fixtures/SampleBigText.txt');
+        $secondText = file_get_contents('./fixtures/SampleBigText.txt');
 
         $this->service->deleteAllFromContent();
 
@@ -79,7 +79,7 @@ class BookServiceTest extends TestCase
     public function canAddAnotherText(): void
     {
         echo PHP_EOL . 'canAddAnotherText' . PHP_EOL;
-        $firstText = file_get_contents('./fixtures/SampleText.txt');
+        $firstText = file_get_contents('./fixtures/SampleBigText.txt');
         $secondText = file_get_contents('./fixtures/AnotherText.txt');
 
         $this->service->deleteAllFromContent();
