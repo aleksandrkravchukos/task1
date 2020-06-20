@@ -37,11 +37,11 @@ Static analysis check
 ## Algorithm 
 
 In this task, a test table is created with the structure:
-  - hash_text (unique field)
-  - one_row (field book mediumtext maximum field size 16mb)
-  - name (string for the name of the book)
+* hash_text (unique field)
+* one_row (field book mediumtext maximum field size 16mb)
+* name (string for the name of the book)
  
 All implemented methods are used in BookServiceTest tests.
-1) canAddString - check to insert a large row 3-5 mb
-2) canAddDuplicateText - check for insertion of a duplicate of a large row of a row, we expect that it will not be inserted
-3) canAddAnotherText - insert two different text 
+1. canAddString - check to insert a large row 3-5 mb
+2. canAddDuplicateText - check for insertion of a duplicate of a large row of a row, we expect that it will not be inserted
+3. canAddAnotherText - insert two different text 
