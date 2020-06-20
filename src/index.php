@@ -3,15 +3,17 @@
 namespace Sample;
 
 use Sample\Config\ConfigClass;
-use Sample\Repository\RepositoryClass;
-use Sample\Service\ServiceClass;
+use Sample\Repository\BookRepository;
+use Sample\Service\BookService;
 
 require 'vendor/autoload.php';
 
-$config = new ConfigClass('localhost', 'root', 'root');
+$config = new ConfigClass();
 
-$repository = new RepositoryClass($config);
+$repository = new BookRepository($config);
 
-$service = new ServiceClass($repository);
+$service = new BookService($repository);
 
-echo $service->insertRow();
+$insert = $service->insertRow();
+
+var_dump($insert);

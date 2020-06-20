@@ -9,7 +9,7 @@ class ConfigClass
     /**
      * @var string
      */
-    private $host;
+    private $dsn;
 
     /**
      * @var string
@@ -21,25 +21,20 @@ class ConfigClass
      */
     private $password;
 
-    /**
-     * ConfigClass constructor.
-     * @param string $host
-     * @param string $username
-     * @param string $password
-     */
-    public function __construct(string $host, string $username, string $password)
+
+    public function __construct()
     {
-        $this->host = $host;
-        $this->username = $username;
-        $this->password = $password;
+        $this->dsn = "mysql:host=db;dbname=content";
+        $this->username = 'root';
+        $this->password = 'root';
     }
 
     /**
      * @return string
      */
-    public function getHost(): string
+    public function getDsn(): string
     {
-        return $this->host;
+        return $this->dsn;
     }
 
     /**
