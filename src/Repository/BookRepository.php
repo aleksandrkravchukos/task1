@@ -5,7 +5,7 @@ namespace Sample\Repository;
 
 use PDO;
 
-class BookRepository
+class BookRepository implements BookRepositoryInterface
 {
     /**
      * @var PDO
@@ -20,7 +20,7 @@ class BookRepository
     /**
      * Delete all rows from database content and table book.
      */
-    public function truncate()
+    public function truncate(): void
     {
         $query = "TRUNCATE `book`";
         $stmt = $this->pdo->prepare($query);
@@ -32,7 +32,7 @@ class BookRepository
      * @param string $bookName
      * @return bool
      */
-    public function insertRow(string $str, string $bookName)
+    public function insertRow(string $str, string $bookName): bool
     {
         $hash = md5($str);
         $query = "INSERT INTO `book` (`name`, `one_row`,`hash_text`) VALUES (:name, :one_row, :hash_text)";
@@ -52,7 +52,7 @@ class BookRepository
     /**
      * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->pdo->query('SELECT * FROM book')
             ->fetchAll(PDO::FETCH_ASSOC);

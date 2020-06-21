@@ -7,7 +7,7 @@ use Sample\Constant;
 use Sample\Exception\BookCreationException;
 use Sample\Repository\BookRepository;
 
-class BookService
+class BookService implements BookServiceInterface
 {
     /**
      * @var BookRepository
@@ -37,7 +37,6 @@ class BookService
         } catch (PDOException $exception) {
             if ($exception->errorInfo[1] == Constant::ERROR_DUPLICATE_CODE) {
                 throw new BookCreationException('Book sentence with this text already exist');
-
             }
         }
     }

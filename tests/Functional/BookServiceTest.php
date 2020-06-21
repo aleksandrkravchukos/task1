@@ -44,6 +44,7 @@ class BookServiceTest extends TestCase
     public function canAddString(): void
     {
         echo PHP_EOL . 'canAddString' . PHP_EOL;
+
         $bookName = Constant::SAMPLE_BOOK_NAME;
         $str = file_get_contents('./fixtures/SampleBigText.txt');
         $this->service->insertRow($str, $bookName);
@@ -59,10 +60,11 @@ class BookServiceTest extends TestCase
      */
     public function canAddDuplicateText(): void
     {
+        echo PHP_EOL . 'canAddDuplicateText' . PHP_EOL;
+
         $this->expectException(BookCreationException::class);
         $this->expectExceptionMessage('Book sentence with this text already exist');
 
-        echo PHP_EOL . 'canAddDuplicateText' . PHP_EOL;
         $str = file_get_contents('./fixtures/SampleBigText.txt');
         $bookName = Constant::SAMPLE_BOOK_NAME;
         $this->service->insertRow($str, $bookName);
