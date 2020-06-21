@@ -1,6 +1,12 @@
 # Docker / PHP 7.4 console / composer / phpunit 
 
-Blank docker project for console php 7.4 projects with composer and phpunit.
+Task1.
+
+* You must create a table in MySQL to store the book.
+* The book arrives line by line, that is, the input is strings.
+* Line size on average 3-5mb.
+* It is necessary to avoid repetition, each line must be unique.
+* You must write the database structure (TABLE DDL) and the code that will record the data.
 
 ## Prerequisites
 
