@@ -18,13 +18,13 @@ Commands from Makefile could be executed manually in case Make utility is not in
 
     Make build
 
-## Build container and install composer dependencies
+## Create original files from dist
 
 If dist files are not copied to actual destination, then
     
     Make copy-dist-configs
     
-## Run docker 
+## Run docker containers
 
     docker-compose up -d
     
