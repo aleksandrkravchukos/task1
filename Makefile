@@ -23,7 +23,7 @@ up:
 
 ## Create database
 create-database:
-	docker exec -i mysql8 mysql -uroot -proot  content < dump/task1.sql
+	docker exec -i mysql_task_1 mysql -uroot -proot  content < dump/task1.sql
 
 ## Run unit tests
 unit-tests:

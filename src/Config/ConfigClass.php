@@ -8,17 +8,17 @@ class ConfigClass
     /**
      * @var string
      */
-    private $dsn;
+    private string $dsn;
 
     /**
      * @var string
      */
-    private $username;
+    private string $username;
 
     /**
      * @var string
      */
-    private $password;
+    private string $password;
 
 
     public function __construct()

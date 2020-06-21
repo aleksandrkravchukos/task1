@@ -4,21 +4,16 @@ namespace Sample\Service;
 
 use PDOException;
 use Sample\Exception\BookCreationException;
-use Sample\Repository\BookRepository;
+use Sample\Repository\BookRepositoryInterface;
 
 class BookService implements BookServiceInterface
 {
     /**
-     * @var BookRepository
+     * @var BookRepositoryInterface
      */
-    private $repository;
+    private BookRepositoryInterface $repository;
 
-    /**
-     * ServiceClass constructor.
-     *
-     * @param BookRepository $repository
-     */
-    public function __construct(BookRepository $repository)
+    public function __construct(BookRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

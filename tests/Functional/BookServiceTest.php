@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Sample\Config\ConfigClass;
 use Sample\Exception\BookCreationException;
 use Sample\Repository\BookRepository;
+use Sample\Repository\BookRepositoryInterface;
 use Sample\Service\BookService;
 use Sample\Service\BookServiceInterface;
 
@@ -20,17 +21,17 @@ class BookServiceTest extends TestCase
     /**
      * @var PDO
      */
-    private $pdo;
+    private PDO $pdo;
 
     /**
-     * @var BookRepository
+     * @var BookRepositoryInterface
      */
-    private $repository;
+    private BookRepositoryInterface $repository;
 
     /**
-     * @var BookService
+     * @var BookServiceInterface
      */
-    private $service;
+    private BookServiceInterface $service;
 
     protected function setUp(): void
     {
