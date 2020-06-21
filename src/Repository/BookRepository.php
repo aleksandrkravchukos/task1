@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace Sample\Repository;
@@ -18,27 +18,18 @@ class BookRepository implements BookRepositoryInterface
     }
 
     /**
-     * Delete all rows from database content and table book.
-     */
-    public function truncate(): void
-    {
-        $query = "TRUNCATE `book`";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-    }
-
-    /**
      * @param string $str
      * @param string $bookName
+     *
      * @return bool
      */
     public function insertRow(string $str, string $bookName): bool
     {
-        $hash = md5($str);
-        $query = "INSERT INTO `book` (`name`, `one_row`,`hash_text`) VALUES (:name, :one_row, :hash_text)";
+        $hash   = md5($str);
+        $query  = "INSERT INTO `book` (`name`, `one_row`,`hash_text`) VALUES (:name, :one_row, :hash_text)";
         $params = [
-            ':name' => $bookName,
-            ':one_row' => $str,
+            ':name'      => $bookName,
+            ':one_row'   => $str,
             ':hash_text' => $hash
         ];
 
@@ -47,14 +38,5 @@ class BookRepository implements BookRepositoryInterface
         $stmt->execute($params);
 
         return true;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAll(): array
-    {
-        return $this->pdo->query('SELECT * FROM book')
-            ->fetchAll(PDO::FETCH_ASSOC);
     }
 }

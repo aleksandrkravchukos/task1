@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Sample\Service;
 
 use PDOException;
-use Sample\Constant;
 use Sample\Exception\BookCreationException;
 use Sample\Repository\BookRepository;
 
@@ -16,6 +15,7 @@ class BookService implements BookServiceInterface
 
     /**
      * ServiceClass constructor.
+     *
      * @param BookRepository $repository
      */
     public function __construct(BookRepository $repository)
@@ -28,6 +28,7 @@ class BookService implements BookServiceInterface
      *
      * @param string $srt
      * @param string $bookName
+     *
      * @throws BookCreationException
      */
     public function insertRow(string $srt, string $bookName): void
@@ -35,7 +36,7 @@ class BookService implements BookServiceInterface
         try {
             $this->repository->insertRow($srt, $bookName);
         } catch (PDOException $exception) {
-            if ($exception->errorInfo[1] == Constant::ERROR_DUPLICATE_CODE) {
+            if ($exception->errorInfo[1] === self::ERROR_DUPLICATE_CODE) {
                 throw new BookCreationException('Book sentence with this text already exist');
             }
         }

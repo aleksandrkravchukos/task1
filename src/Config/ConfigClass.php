@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace Sample\Config;
-
 
 class ConfigClass
 {
@@ -24,7 +23,7 @@ class ConfigClass
 
     public function __construct()
     {
-        $this->dsn = "mysql:host=db;dbname=content";
+        $this->dsn      = "mysql:host=db;dbname=content";
         $this->username = 'root';
         $this->password = 'root';
     }

@@ -17,9 +17,13 @@ copy-dist-configs:
 dump-autoload:
 	docker-compose run --rm --no-deps php-cli composer dump-autoload
 
-## Run console application
-run:
-	docker-compose run --rm --no-deps php-cli php src/index.php
+## Run containers
+up:
+	docker-compose up -d
+
+## Create database
+create-database:
+	docker exec -i mysql8 mysql -uroot -proot  content < dump/task1.sql
 
 ## Run unit tests
 unit-tests:

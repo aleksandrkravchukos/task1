@@ -26,7 +26,11 @@ If dist files are not copied to actual destination, then
     
 ## Run docker containers
 
-    docker-compose up -d
+    Make up
+
+## Create database
+
+    Make create-database
     
 ## Check docker containers
 
@@ -41,6 +45,11 @@ If dist files are not copied to actual destination, then
 Runs container and executes functional tests.
 
     Make functional-tests
+
+
+## Fix code style
+
+    Make cs-fix
 
 ## Static analysis
 
