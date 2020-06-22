@@ -38,7 +38,7 @@ If dist files are not copied to actual destination, then
     
 ## Create database 
 
-    docker exec -i mysql8 mysql -uroot -proot  content < dump/task1.sql        
+    docker exec -i mysql_task_1 mysql -uroot -proot  content < dump/task1.sql        
 
 ## Run functional tests
 
