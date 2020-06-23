@@ -27,18 +27,14 @@ If dist files are not copied to actual destination, then
 ## Run docker containers
 
     Make up
-
-## Create database
-
-    Make create-database
     
 ## Check docker containers
 
-    docker ps    
-    
-## Create database structure
+    docker ps 
 
-    docker exec -i mysql_task_1 mysql -uroot -proot  content < dump/task1.sql        
+## Create database
+
+    Make create-database       
 
 ## Run functional tests
 
