@@ -1,5 +1,3 @@
-CREATE DATABASE content;
-
 USE content;
 
 CREATE TABLE `book` (
